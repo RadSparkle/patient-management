@@ -1,0 +1,26 @@
+server:
+  port: 7050
+spring:
+  h2:
+    console:
+      enabled: true
+
+  datasource:
+    url: jdbc:h2:mem:hd;MODE=MySQL;
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 1234
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format_sql: true
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:database/schema.sql
+      encoding: UTF-8
