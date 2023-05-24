@@ -46,4 +46,17 @@ public class PatientController {
             return DefaultResponse.from(BAD_REQUEST.value(),"존재하지않는 환자 입니다.", patient).build();
         }
     }
+
+    @PatchMapping("")
+    @ApiOperation(value = "환자 정보 수정 API", notes = "입력받은 데이터로 환자 정보를 수정하는 API")
+    public ResponseEntity<Object> patientModify(@RequestBody PatientVo patient){
+        try {
+            patientService.modifyPatient(patient);
+            log.info("환자 수정 성공");
+            return DefaultResponse.from(OK.value(), "환자 정보 수정 완료", patient).build();
+        } catch (NullPointerException e) {
+            log.error("환자 수정 실패");
+            return DefaultResponse.from(BAD_REQUEST.value(),"존재하지않는 환자 입니다.", patient).build();
+        }
+    }
 }

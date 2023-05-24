@@ -45,4 +45,11 @@ public class PatientEntity {
         this.phoneNum = vo.getPhoneNum();
     }
 
+    public void updatePatient(PatientVo vo) {
+        this.patientNm = vo.getPatientNm();
+        this.gender = vo.getGender();
+        this.birth = vo.getBirth();
+        this.phoneNum = vo.getPhoneNum();
+    }
+
 }

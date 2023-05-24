@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -22,6 +24,8 @@ public class PatientServiceImpl implements PatientService {
 
     @Autowired
     private HospitalRepository hospitalRepository;
+
+    private final EntityManager em;
 
     @Override
     public Object addPatient(PatientVo patient) {
@@ -49,5 +53,13 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public void deletePatient(PatientVo patient) {
         patientRepository.deleteById(patient.getPatientId());
+    }
+
+    @Override
+    @Transactional
+    public void modifyPatient(PatientVo patient) {
+        PatientEntity patientInfo = patientRepository.findById(patient.getPatientId()).orElse(null);
+        patientInfo.updatePatient(patient);
+        em.merge(patientInfo);
     }
 }
