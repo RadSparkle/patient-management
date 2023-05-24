@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -45,5 +44,10 @@ public class PatientServiceImpl implements PatientService {
         PatientEntity result = patientRepository.save(patientInfo);
         return result;
 
+    }
+
+    @Override
+    public void deletePatient(PatientVo patient) {
+        patientRepository.deleteById(patient.getPatientId());
     }
 }

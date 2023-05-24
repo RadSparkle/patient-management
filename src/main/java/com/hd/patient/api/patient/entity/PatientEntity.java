@@ -15,7 +15,8 @@ import javax.persistence.*;
 public class PatientEntity {
     @Id
     @GeneratedValue
-    private int patientId;
+    @Column(name="patient_id")
+    private Long patientId;
 
     @ManyToOne
     @JoinColumn(name="hospital_id")
