@@ -17,7 +17,9 @@ import springfox.documentation.spring.web.plugins.Docket;
 public class SwaggerConfiguration {
 
     private static final String API_NAME = "Patient-management API";
-    private static final String API_VERSION = "0.0.1 Verstion";
+
+    private static final String API_VERSION = "1.0 Verstion";
+
     private static final String API_DESCRIPTION = "환자 관리 API 명세서";
 
     private static final String BASE_PACKAGE = "com.hd.patient.api";
