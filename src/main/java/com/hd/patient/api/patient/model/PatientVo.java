@@ -3,14 +3,12 @@ package com.hd.patient.api.patient.model;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Value;
-import org.apache.el.util.Validation;
 
 @Data
 @NoArgsConstructor
 public class PatientVo {
     @ApiModelProperty(value = "환자 ID", example = "1")
-    private int patientId;
+    private Long patientId;
 
     @ApiModelProperty(value = "병원 ID", example = "1")
     private Long hospitalId;
