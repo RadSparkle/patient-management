@@ -24,3 +24,6 @@ spring:
       mode: always
       schema-locations: classpath:database/schema.sql
       encoding: UTF-8
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
