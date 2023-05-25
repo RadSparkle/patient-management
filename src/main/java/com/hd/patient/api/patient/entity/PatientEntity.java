@@ -2,9 +2,12 @@ package com.hd.patient.api.patient.entity;
 
 import com.hd.patient.api.hospital.entity.HospitalEntity;
 import com.hd.patient.api.patient.model.PatientVo;
+import com.hd.patient.api.visit.entity.VisitEntity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "patients")
 @Table(name = "patients")
@@ -36,6 +39,10 @@ public class PatientEntity {
 
     @Column(name = "mobile_phone")
     private String phoneNum;
+
+    @OneToMany(mappedBy = "patientId", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private List<VisitEntity> visit = new ArrayList<>();
 
     public PatientEntity(PatientVo vo) {
         this.patientNm = vo.getPatientNm();
