@@ -7,5 +7,5 @@ import java.util.List;
 public interface SearchService {
     List<PatientVo> searchAll();
 
-    List<PatientVo> searchByType(String keyword, String type);
+    List<PatientVo> searchAllByType(String keyword, String type);
 }

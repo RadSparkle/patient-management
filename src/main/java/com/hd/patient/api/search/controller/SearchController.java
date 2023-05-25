@@ -4,6 +4,7 @@ import com.hd.patient.api.patient.model.PatientVo;
 import com.hd.patient.api.search.service.SearchService;
 import com.hd.patient.common.DefaultResponse;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping("/api/1.0/search")
+@Slf4j
 public class SearchController {
 
     @Autowired
@@ -27,10 +29,12 @@ public class SearchController {
                                               ) {
         List<PatientVo> patientList = (keyword == null)
                 ? searchService.searchAll() // 전체 검색
-                : searchService.searchByType(keyword, type); // 키워드로 검색
+                : searchService.searchAllByType(keyword, type); // 키워드로 검색
         if (patientList.isEmpty()) {
+            log.info("검색 결과가 없음");
             return DefaultResponse.from(BAD_REQUEST.value(), "검색결과가 없습니다.").build();
         }
+        log.info("검색 성공");
         return DefaultResponse.from(OK.value(), "검색 완료", patientList).build();
     }
 }

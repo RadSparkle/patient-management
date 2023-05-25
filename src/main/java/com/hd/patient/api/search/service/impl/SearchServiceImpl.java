@@ -22,7 +22,8 @@ public class SearchServiceImpl implements SearchService {
     }
 
     @Override
-    public List<PatientVo> searchByType(String keyword, String type) {
-        return null;
+    public List<PatientVo> searchAllByType(String keyword, String type) {
+        List<PatientVo> patiendList = searchRepository.searchAllByType(keyword, type);
+        return patiendList;
     }
 }

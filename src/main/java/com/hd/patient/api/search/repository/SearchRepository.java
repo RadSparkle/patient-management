@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface SearchRepository {
     List<PatientVo> searchAll();
+
+    List<PatientVo> searchAllByType(String keyword, String type);
 }
