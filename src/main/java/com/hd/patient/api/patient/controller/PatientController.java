@@ -29,8 +29,8 @@ public class PatientController {
             log.info("환자 입력 성공");
             return DefaultResponse.from(CREATED.value(), "환자 입력 성공", result).build();
         } else {
-            log.error("환자 입력 실패");
-            return DefaultResponse.from(BAD_REQUEST.value(), "환자 입력 실패").build();
+            log.error("환자 입력 실패.");
+            return DefaultResponse.from(BAD_REQUEST.value(), "환자 입력 실패. 존재하지않는 병원입니다.").build();
         }
     }
 
