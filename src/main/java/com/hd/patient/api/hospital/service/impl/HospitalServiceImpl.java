@@ -20,4 +20,9 @@ public class HospitalServiceImpl implements HospitalService {
 
         return result;
     }
+
+    @Override
+    public void deleteHospital(HospitalVo hospital) {
+        hospitalRepository.deleteById(hospital.getHospitalId());
+    }
 }

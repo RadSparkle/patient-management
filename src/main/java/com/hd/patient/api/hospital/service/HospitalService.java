@@ -4,4 +4,6 @@ import com.hd.patient.api.hospital.model.HospitalVo;
 
 public interface HospitalService {
     Object addHospital(HospitalVo hospital);
+
+    void deleteHospital(HospitalVo hospital);
 }
