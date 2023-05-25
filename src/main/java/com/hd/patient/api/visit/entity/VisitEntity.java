@@ -29,13 +29,13 @@ public class VisitEntity {
     private PatientEntity patientId;
 
     @Column(name = "registration_date")
-    private String registrationDate;
+    private String visitDate;
 
     @Column(name = "visit_status_code")
     private String visitStatusCode;
 
     public VisitEntity(VisitVo vo) {
-        this.registrationDate = vo.getRegistrationDate();
+        this.visitDate = vo.getVisitDate();
         this.visitStatusCode = vo.getVisitStatusCode();
     }
 }

@@ -17,7 +17,7 @@ public class VisitVo {
     private Long patientId;
 
     @ApiModelProperty(value = "접수 일시",example = "13ds293r2f")
-    private String registrationDate;
+    private String visitDate;
 
     @ApiModelProperty(value = "방문 상태 코드",example = "M")
     private String visitStatusCode;
