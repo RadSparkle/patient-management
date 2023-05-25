@@ -2,10 +2,6 @@ package com.hd.patient.api;
 
 import com.hd.patient.api.hospital.entity.HospitalEntity;
 import com.hd.patient.api.patient.entity.PatientEntity;
-import com.hd.patient.api.patient.model.PatientVo;
-import com.hd.patient.api.patient.repository.PatientRepository;
-import com.hd.patient.api.search.model.Paging;
-import com.hd.patient.api.search.repository.SearchRepository;
 import com.hd.patient.api.visit.entity.VisitEntity;
 import com.hd.patient.api.visit.repository.VisitRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,17 +9,15 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Transactional
-class visitRepositoryTest {
+class VisitRepositoryTest {
     @Autowired
     private EntityManager em;
 
