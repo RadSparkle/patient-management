@@ -26,9 +26,6 @@ public class PatientServiceImpl implements PatientService {
     @Autowired
     private PatientRepository patientRepository;
 
-    @Autowired
-    private HospitalRepository hospitalRepository;
-
     private final EntityManager em;
 
     @Override
