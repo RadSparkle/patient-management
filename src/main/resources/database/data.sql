@@ -12,6 +12,3 @@ insert ignore into codes(code_group, code, code_name) values ('진료과목코�
 insert ignore into codes(code_group, code, code_name) values ('진료과목코드', '02', '안과');
 insert ignore into codes(code_group, code, code_name) values ('진료유형코드', 'D', '약처방');
 insert ignore into codes(code_group, code, code_name) values ('진료유형코드', 'T', '검사');
-
-insert ignore into hospitals(hospital_id, hospital_name, nursing_home_number, hospital_director_name) values (1, '병원1', '54-23-11', '홍길동');
-insert ignore into hospitals(hospital_id, hospital_name, nursing_home_number, hospital_director_name) values (2, '병원2', '99-88-77', '김의원');
