@@ -1,5 +1,6 @@
 package com.hd.patient.api.hospital.controller;
 
+import com.hd.patient.api.hospital.entity.HospitalEntity;
 import com.hd.patient.api.hospital.model.HospitalVo;
 import com.hd.patient.api.hospital.service.HospitalService;
 import com.hd.patient.common.DefaultResponse;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static org.springframework.http.HttpStatus.*;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
@@ -43,6 +46,20 @@ public class HospitalController {
             return DefaultResponse.from(OK.value(), "병원 정보 삭제 완료", hospital).build();
         } catch (EmptyResultDataAccessException e) {
             log.error("병원 삭제 실패");
+            return DefaultResponse.from(BAD_REQUEST.value(),"존재하지않는 병원 입니다.", hospital).build();
+        }
+    }
+
+
+    @PatchMapping("")
+    @ApiOperation(value = "병원 정보 수정 API", notes = "입력받은 데이터로 병원 정보를 수정하는 API")
+    public ResponseEntity<Object> hospitalModify(@RequestBody HospitalVo hospital){
+        try {
+            hospitalService.modifyHospital(hospital);
+            log.info("병원 수정 성공");
+            return DefaultResponse.from(OK.value(), "병원 정보 수정 완료", hospital).build();
+        } catch (NullPointerException e) {
+            log.error("병원 수정 실패");
             return DefaultResponse.from(BAD_REQUEST.value(),"존재하지않는 병원 입니다.", hospital).build();
         }
     }

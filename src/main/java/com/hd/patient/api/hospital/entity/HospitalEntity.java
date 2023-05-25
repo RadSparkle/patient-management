@@ -32,4 +32,10 @@ public class HospitalEntity {
         this.nursingHomeNum = vo.getNursingHomeNum();
         this.hospitalDirectorNm = vo.getHospitalDirectorNm();
     }
+
+    public void updateHospital(HospitalVo vo) {
+        this.hospitalNm = vo.getHospitalNm();
+        this.nursingHomeNum = vo.getNursingHomeNum();
+        this.hospitalDirectorNm = vo.getHospitalDirectorNm();
+    }
 }
