@@ -38,4 +38,11 @@ public class VisitEntity {
         this.visitDate = vo.getVisitDate();
         this.visitStatusCode = vo.getVisitStatusCode();
     }
+
+    public VisitEntity(HospitalEntity hospital, PatientEntity patient, String visitDate, String visitStatusCode) {
+        this.hospitalId = hospital;
+        this.patientId = patient;
+        this.visitDate = visitDate;
+        this.visitStatusCode = visitStatusCode;
+    }
 }
