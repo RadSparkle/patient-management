@@ -53,6 +53,19 @@ public class PatientEntity {
         this.hospitalId = hospital;
     }
 
+    public PatientEntity(String patientNm, String patientRegNum, String gender, String birth, String phoneNum, HospitalEntity hospital) {
+        this(patientNm, patientRegNum, gender, birth, phoneNum);
+        this.hospitalId = hospital;
+    }
+
+    public PatientEntity(String patientNm, String patientRegNum, String gender, String birth, String phoneNum) {
+        this.patientNm = patientNm;
+        this.patientRegNum = patientRegNum;
+        this.gender = gender;
+        this.birth = birth;
+        this.phoneNum = phoneNum;
+    }
+
     public void updatePatient(PatientVo vo) {
         this.patientNm = vo.getPatientNm();
         this.gender = vo.getGender();
