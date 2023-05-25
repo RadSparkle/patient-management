@@ -23,6 +23,7 @@ spring:
     init:
       mode: always
       schema-locations: classpath:database/schema.sql
+      data_locations: classpath:database/data.sql
       encoding: UTF-8
   mvc:
     pathmatch:
