@@ -63,4 +63,17 @@ public class HospitalController {
             return DefaultResponse.from(BAD_REQUEST.value(),"존재하지않는 병원 입니다.", hospital).build();
         }
     }
+
+    @GetMapping("")
+    @ApiOperation(value = "병원 리스트 조회 API", notes = "병원 리스트를 조회하는 API")
+    public ResponseEntity<Object> hospitallist(){
+        List<HospitalEntity> hospitalList = hospitalService.listHospital();
+        System.out.println(hospitalList);
+        if (hospitalList.isEmpty()) {
+            log.error("병원 리스트 조회 실패");
+            return DefaultResponse.from(BAD_REQUEST.value(), "등록된 병원이 없습니다").build();
+        }
+        log.info("병원 리스트 조회 성공");
+        return DefaultResponse.from(OK.value(), "병원 리스트 조회 완료", hospitalList).build();
+    }
 }

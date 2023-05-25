@@ -41,4 +41,12 @@ public class HospitalServiceImpl implements HospitalService {
         hospitalInfo.updateHospital(hospital);
         em.merge(hospitalInfo);
     }
+    @Override
+    public List<HospitalEntity> listHospital() {
+        List<HospitalEntity> hospitalList = hospitalRepository.findAll();
+        if (hospitalList == null) {
+            return null;
+        }
+        return hospitalList;
+    }
 }

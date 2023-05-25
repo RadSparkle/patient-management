@@ -11,4 +11,6 @@ public interface HospitalService {
     void deleteHospital(HospitalVo hospital);
 
     void modifyHospital(HospitalVo hospital);
+
+    List<HospitalEntity> listHospital();
 }
