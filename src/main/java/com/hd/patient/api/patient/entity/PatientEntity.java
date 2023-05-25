@@ -44,12 +44,13 @@ public class PatientEntity {
     @ToString.Exclude
     private List<VisitEntity> visit = new ArrayList<>();
 
-    public PatientEntity(PatientVo vo) {
+    public PatientEntity(PatientVo vo, HospitalEntity hospital) {
         this.patientNm = vo.getPatientNm();
         this.patientRegNum = vo.getPatientRegNum();
         this.gender = vo.getGender();
         this.birth = vo.getBirth();
         this.phoneNum = vo.getPhoneNum();
+        this.hospitalId = hospital;
     }
 
     public void updatePatient(PatientVo vo) {
