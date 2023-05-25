@@ -1,10 +1,11 @@
 package com.hd.patient.api.hospital.entity;
 
+import com.hd.patient.api.hospital.model.HospitalVo;
 import lombok.*;
 
 import javax.persistence.*;
 
-@Entity(name = "hospital")
+@Entity(name = "hospitalEntity")
 @Table(name = "hospitals")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,4 +26,10 @@ public class HospitalEntity {
 
     @Column(name = "hospital_director_name")
     private String hospitalDirectorNm;
+
+    public HospitalEntity(HospitalVo vo){
+        this.hospitalNm = vo.getHospitalNm();
+        this.nursingHomeNum = vo.getNursingHomeNum();
+        this.hospitalDirectorNm = vo.getHospitalDirectorNm();
+    }
 }
