@@ -2,13 +2,16 @@ package com.hd.patient.api.search.repository.impl;
 
 import com.hd.patient.api.patient.model.PatientVo;
 import com.hd.patient.api.patient.model.QPatientVo;
-import com.hd.patient.api.search.model.SearchVo;
+import com.hd.patient.api.search.model.Paging;
 import com.hd.patient.api.search.repository.SearchRepository;
 import com.hd.patient.enums.SearchEnum;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -25,7 +28,7 @@ public class SearchRepositoryImpl implements SearchRepository {
     private final JPAQueryFactory query;
 
     @Override
-    public List<PatientVo> searchAll() {
+    public Page<PatientVo> searchAll(Paging paging) {
         List<PatientVo> patientList = query
                 .select(
                         new QPatientVo(patientEntity.patientId.as("patientId"), patientEntity.patientNm, hospitalEntity.hospitalId.as("hospitalId"),
@@ -35,14 +38,21 @@ public class SearchRepositoryImpl implements SearchRepository {
                 .from(patientEntity)
                 .innerJoin(patientEntity.hospitalId, hospitalEntity)
                 .leftJoin(patientEntity.visit, visitEntity)
+                .offset(paging.getOffset())
+                .limit(paging.getPageSize())
                 .orderBy(visitEntity.visitDate.desc())
                 .fetch();
-        return patientList;
+
+        Long count = query
+                .select(patientEntity.count())
+                .from(patientEntity)
+                .fetchOne();
+        return new PageImpl<>(patientList, PageRequest.of(paging.getPageNum() - 1, paging.getPageSize()), count);
     }
 
     @Override
-    public List<PatientVo> searchAllByType(String keyword, String type) {
-        List<PatientVo> patientVoList = query
+    public Page<PatientVo> searchAllByType(String keyword, String type, Paging paging) {
+        List<PatientVo> patientList = query
                 .select(
                         new QPatientVo(patientEntity.patientId.as("patientId"), patientEntity.patientNm, hospitalEntity.hospitalId.as("hospitalId"),
                                 patientEntity.gender, patientEntity.patientRegNum, patientEntity.birth, patientEntity.phoneNum,
@@ -51,10 +61,18 @@ public class SearchRepositoryImpl implements SearchRepository {
                 .from(patientEntity)
                 .innerJoin(patientEntity.hospitalId, hospitalEntity)
                 .leftJoin(patientEntity.visit, visitEntity)
+                .offset(paging.getOffset())
+                .limit(paging.getPageSize())
                 .where(isSearchable(keyword, type))
                 .orderBy(visitEntity.visitDate.desc())
                 .fetch();
-        return patientVoList;
+
+        Long count = query
+                .select(patientEntity.count())
+                .from(patientEntity)
+                .fetchOne();
+
+        return new PageImpl<>(patientList, PageRequest.of(paging.getPageNum() - 1, paging.getPageSize()), count);
     }
 
     // Null 예외처리를 위한 메소드
