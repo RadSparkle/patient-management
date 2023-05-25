@@ -88,7 +88,6 @@ class PatientRepositoryTest {
     @Test
     @DisplayName("환자 등록")
     public void insert() {
-        //given
         HospitalEntity hospital = em.find(HospitalEntity.class, 1L);
         PatientEntity newPatient = new PatientEntity(
                 "뉴페이스", "998877",
@@ -96,6 +95,28 @@ class PatientRepositoryTest {
         );
 
         patientRepository.save(newPatient);
+
+        PatientEntity newPatient2 = new PatientEntity(
+                "뉴페이스1", "97",
+                "M", "2011-03-13", "010-0002-0101", hospital
+        );
+
+        patientRepository.save(newPatient2);
+
+        PatientEntity newPatient3 = new PatientEntity(
+                "헝길동", "998877",
+                "F", "2011-06-03", "010-0442-0101", hospital
+        );
+
+        patientRepository.save(newPatient3);
+
+        PatientEntity newPatient4 = new PatientEntity(
+                "뉴GFG", "998877",
+                "F", "2011-03-03", "010-1232-0101", hospital
+        );
+
+        patientRepository.save(newPatient4);
+
     }
 
     @Test
