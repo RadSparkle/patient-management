@@ -1,0 +1,36 @@
+package com.hd.patient.api.search.controller;
+
+import com.hd.patient.api.patient.model.PatientVo;
+import com.hd.patient.api.search.service.SearchService;
+import com.hd.patient.common.DefaultResponse;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.OK;
+
+@RestController
+@RequestMapping("/api/1.0/search")
+public class SearchController {
+
+    @Autowired
+    private SearchService searchService;
+
+    @GetMapping("/{type}")
+    @ApiOperation(value = "환자 정보 검색 API", notes = "키워드가 없다면 전체검색, 키워드가 있다면 해당값으로 검색")
+    public ResponseEntity<Object> patientList(@PathVariable String type,
+                                              @RequestParam(required = false) String keyword
+                                              ) {
+        List<PatientVo> patientList = (keyword == null)
+                ? searchService.searchAll() // 전체 검색
+                : searchService.searchByType(keyword, type); // 키워드로 검색
+        if (patientList.isEmpty()) {
+            return DefaultResponse.from(BAD_REQUEST.value(), "검색결과가 없습니다.").build();
+        }
+        return DefaultResponse.from(OK.value(), "검색 완료", patientList).build();
+    }
+}
