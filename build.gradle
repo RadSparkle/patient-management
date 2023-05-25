@@ -1,12 +1,26 @@
+buildscript {
+	ext {
+		queryDslVersion = "5.0.0"
+	}
+}
+
 plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.7.12'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10'
 }
 
 group = 'com.hd'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+	querydsl.extendsFrom compileClasspath
+}
 
 repositories {
 	mavenCentral()
@@ -21,6 +35,28 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	implementation 'io.springfox:springfox-boot-starter:3.0.0'
 	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+
+	//querydsl (http://honeymon.io/tech/2020/07/09/gradle-annotation-processor-with-querydsl.html)
+	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+	implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
+	testImplementation 'com.querydsl:querydsl-jpa:5.0.0'
+	testImplementation 'com.querydsl:querydsl-apt:5.0.0'
+
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+}
+
+//querydsl
+def querydslDir = "$buildDir/generated/querydsl"
+
+querydsl {
+	jpa = true
+	querydslSourcesDir = querydslDir
+}
+sourceSets {
+	main.java.srcDir querydslDir
+}
+compileQuerydsl{
+	options.annotationProcessorPath = configurations.querydsl
 }
 
 tasks.named('test') {
